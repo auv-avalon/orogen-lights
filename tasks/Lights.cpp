@@ -48,12 +48,18 @@ bool Lights::startHook()
 void Lights::updateHook()
 {
     LightsBase::updateHook();
+            _light_value.write(0);
     canbus::Message msg;
-    if (_can_in.read(msg) != RTT::NoData){
+    bool neu = false;
+    while (_can_in.read(msg) == RTT::NewData){
+        neu = true;
+    }
+    if (neu){
         uint8_t light_value1 = (uint8_t)msg.data[0];
         uint8_t light_value2 = (uint8_t)msg.data[1];
         uint16_t value = light_value1; 
         value = value << 8 | light_value2&0xFF;
+            _light_value.write(value);
         if (value != current_value){
             current_value = value;
             _light_value.write(value);
