@@ -49,19 +49,22 @@ void Lights::updateHook()
 {
     LightsBase::updateHook();
     canbus::Message msg;
-    while (_can_in.read(msg) == RTT::NewData){
+    if (_can_in.read(msg) != RTT::NoData){
         uint8_t light_value1 = (uint8_t)msg.data[0];
         uint8_t light_value2 = (uint8_t)msg.data[1];
         uint16_t value = light_value1; 
-        value = value << 8 | value2;
-        _light_value.write(value);
-        char a = '@';
-        write(fd,&a,1);
-        write(fd,&light_value2,1);
-        write(fd,&light_value1,1);
-        write(fd,&a,1);
-        write(fd,&light_value2,1);
-        write(fd,&light_value1,1);
+        value = value << 8 | light_value2&0xFF;
+        if (value != current_value){
+            current_value = value;
+            _light_value.write(value);
+            char a = '@';
+            write(fd,&a,1);
+            write(fd,&light_value2,1);
+            write(fd,&light_value1,1);
+            write(fd,&a,1);
+            write(fd,&light_value2,1);
+            write(fd,&light_value1,1);
+        }
     }
 }
 void Lights::errorHook()

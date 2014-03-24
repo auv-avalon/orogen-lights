@@ -39,6 +39,7 @@ tasks/Task.cpp, and will be put in the lights namespace.
 	friend class LightsBase;
     protected:
         int fd;
+        uint16_t current_value;
 
 
 

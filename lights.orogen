@@ -38,8 +38,8 @@ task_context "Lights" do
     # was available, and false otherwise. _input.connected() returns if this
     # input is connected to an output or not.
     input_port("can_in", "canbus/Message")
-    output_port("light_value", "uint16_t")
+    output_port("light_value", "int")
     
-    port_driven
+    periodic 10
 end
 
