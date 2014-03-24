@@ -40,6 +40,6 @@ task_context "Lights" do
     input_port("can_in", "canbus/Message")
     output_port("light_value", "int")
     
-    port_driven
+    periodic 1
 end
 
