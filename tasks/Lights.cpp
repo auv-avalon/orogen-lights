@@ -65,11 +65,11 @@ void Lights::updateHook()
             _light_value.write(value);
             char a = '@';
             write(fd,&a,1);
-            write(fd,&light_value2,1);
             write(fd,&light_value1,1);
+            write(fd,&light_value2,1);
             write(fd,&a,1);
-            write(fd,&light_value2,1);
             write(fd,&light_value1,1);
+            write(fd,&light_value2,1);
         }
     }
 }
