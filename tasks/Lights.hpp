@@ -98,6 +98,7 @@ tasks/Task.cpp, and will be put in the lights namespace.
          * component is stopped and recover() needs to be called before starting
          * it again. Finally, FatalError cannot be recovered.
          */
+        void writeOut(uint16_t value);
         void updateHook();
 
         /** This hook is called by Orocos when the component is in the
