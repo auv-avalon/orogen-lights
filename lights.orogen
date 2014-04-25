@@ -16,6 +16,6 @@ task_context "Lights" do
     #Input port to configure the lights from other tasks.
     output_port("light_value", "int")
     
-    periodic 0.1
+    periodic 0.5
 end
 
